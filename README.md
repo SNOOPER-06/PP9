@@ -116,7 +116,9 @@ gcc -c solutions/flowchart_impl solutions/flowchart_impl.c
 Reflection:
 
 * **Explain how each flowchart node maps to your C code.**
-
+*The function begins by setting a starting value, result, to 1. It then processes every number from 1 up to a number x that it’s given. For each of these numbers, it checks if the number is even or odd.
+If the number is even, it multiplies the current result by that number. If it’s odd, it adds the number to result. After this, it checks whether the result has grown larger than 1000. If it has, it reduces the result by 100 to keep it from growing too fast.
+This continues for every number from 1 to x. At the end, once all the steps are done, the function gives back the final result — which reflects all the additions, multiplications, and reductions it performed along the way.
 ---
 
 ### Task 3: Code-to-Flowchart
@@ -156,14 +158,48 @@ Reflection:
 3. For each function, draw a **Mermaid** flowchart capturing loops, branches, and switch logic. Include your Mermaid code in a Markdown file under `solutions/`.
 
 **Example Skeleton:**
+**Function 1:**
 
 ```mermaid
 graph TD
-  A[Start] --> B[Initialize]
-  B --> C{Condition}
-  ...
+ A[Start] --> B[Set result = 1]
+    B --> C[i = 1 to x]
+    C --> D{ i % 2 == 0?}
+    D -- Yes --> E[result += i]
+    D -- No  --> F[result *= i]
+    E --> G{result > 1000?}
+    F --> G
+    G -- Yes --> H[result -= 100]
+    G -- No  --> I[Increment i]
+    H --> I
+    I --> C
+   
+```
+**Example Skeleton:**
+**Function 2:**
+```mermaid
+graph TD
+    A[Start] --> B[Set state = 0]
+    B --> C[i = 0 to len-1]
+    C --> D{arr i < 0?}
+    D -- Yes --> E[state = -1]
+    D -- No --> F{arr i == 0?}
+    F -- Yes --> G[state = 0]
+    F -- No  --> H[state = 1]
+    E --> I{state == 1?}
+    G --> I
+    H --> I
+    I -- Yes --> J[break]
+    I -- No  --> K{Increment i}
+    K -- Yes --> C
+    K -- No  --> L[After loop]
+    J --> L
+    L --> M{state == 1?}
+    M -- Yes --> N[Return true]
+    M -- No  --> O[Return false]
+    N --> P[End]
+    O --> P
 ```
 
 ---
-
 **Remember:** Stop after **90 minutes** and record where you stopped.
